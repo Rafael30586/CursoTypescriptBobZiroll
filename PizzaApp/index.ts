@@ -51,16 +51,19 @@ function completeOrder2(orderId: number){
 
 }
 
-function getPizzaDetail(identifier: number | string){ // En este caso, el argumento puede ser un número o un string
+function getPizzaDetail(identifier: number | string): Pizza | undefined { // En este caso, el argumento puede ser un número o un string, además, estamos aclarando que retorna datos de tipo 'Pizza' o undefined
     if(typeof(identifier)==="number"){
-        //menu2.find()
+        for(let pizza of menu2){
+            if(identifier===pizza.id) return pizza;
+        }
 
     }else if(typeof(identifier)==="string"){
-
+        for(let pizza of menu2){
+            if(identifier===pizza.name) return pizza;
+        }
+    }else{
+        throw new TypeError("Parameter `identifier` must be either a string or a number");
     }
 
 }
 
-function encontrarPizzaPorId(value, index: number, array: Pizza[]){
-
-}
