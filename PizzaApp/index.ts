@@ -10,23 +10,31 @@ type Order = {
     status: "completed" | "ordered"
 }
 
-
-const menu2: Pizza[] = [
-    {id:1, name: "margarita", price: 8},
-    {id:2, name: "pepperoni", price: 10},
-    {id:3, name: "hawaian", price: 10},
-    {id:4, name: "veggie", price: 9},
-]
-
-var id = 0;
+let id = 0;
 let cashInRegister2 = 100;
 const orderQueue2: Order[] = [];
+let pizzaGlobalId = 1;
 
-function addNewPizza2(pizza: Pizza){
+const menu2: Pizza[] = [
+    {id: pizzaGlobalId++, name: "margarita", price: 8},
+    {id: pizzaGlobalId++, name: "pepperoni", price: 10},
+    {id: pizzaGlobalId++, name: "hawaian", price: 10},
+    {id: pizzaGlobalId++, name: "veggie", price: 9},
+]
+
+
+
+function addNewPizza2(pizza: Pizza): void{ //Se puede aclarar que una función retorna undefined colocando void, aunque no es necesario, la función funciona igual
+    pizza.id = pizzaGlobalId;
+    pizzaGlobalId++;
     menu2.push(pizza);
 }
 
-function placeOrder2(pizzaName: string){
+addNewPizza2({id:0,name:"Chicken bacon ranch",price: 12})
+addNewPizza2({id:0,name:"BBQ chicken",price: 12})
+addNewPizza2({id:0,name:"Spicy sausage",price: 11})
+
+function placeOrder2(pizzaName: string): Order | undefined{
     for(let pizza of menu2){
         if(pizzaName === pizza.name){
             id = id + 1;
@@ -40,7 +48,7 @@ function placeOrder2(pizzaName: string){
 
 }
 
-function completeOrder2(orderId: number){
+function completeOrder2(orderId: number): Order | undefined{
     for(let singleOrder of orderQueue2){
         if(orderId === singleOrder.id){
             singleOrder.status = "completed";
