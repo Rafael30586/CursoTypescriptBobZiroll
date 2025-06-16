@@ -24,15 +24,20 @@ const menu2: Pizza[] = [
 
 
 
-function addNewPizza2(pizza: Pizza): void{ //Se puede aclarar que una función retorna undefined colocando void, aunque no es necesario, la función funciona igual
-    pizza.id = pizzaGlobalId;
+function addNewPizza2(pizza: Omit<Pizza, "id">): Pizza{ //Se puede aclarar que una función retorna undefined colocando void, aunque no es necesario, la función funciona igual
+    let newPizza: Pizza ={
+        id: pizzaGlobalId,
+        name: pizza.name,
+        price: pizza.price
+    }
     pizzaGlobalId++;
-    menu2.push(pizza);
+    menu2.push(newPizza);
+    return newPizza;
 }
 
-addNewPizza2({id:0,name:"Chicken bacon ranch",price: 12})
-addNewPizza2({id:0,name:"BBQ chicken",price: 12})
-addNewPizza2({id:0,name:"Spicy sausage",price: 11})
+addNewPizza2({name:"Chicken bacon ranch",price: 12})
+addNewPizza2({name:"BBQ chicken",price: 12})
+addNewPizza2({name:"Spicy sausage",price: 11})
 
 function placeOrder2(pizzaName: string): Order | undefined{
     for(let pizza of menu2){
