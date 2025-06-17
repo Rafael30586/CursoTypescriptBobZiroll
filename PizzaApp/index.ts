@@ -53,6 +53,14 @@ function placeOrder2(pizzaName: string): Order | undefined{
 
 }
 
+function addToArray<T>(array: T[], item: T): T[]{
+    array.push(item)
+    return array
+}
+
+addToArray<Pizza>(menu2,{id: pizzaGlobalId++,name: "Chicken Bacon Ranch", price: 12})
+addToArray<Order>(orderQueue2, { id: pizzaGlobalId++,pizza: menu2[2].name, status: "completed"})
+
 function completeOrder2(orderId: number): Order | undefined{
     for(let singleOrder of orderQueue2){
         if(orderId === singleOrder.id){
